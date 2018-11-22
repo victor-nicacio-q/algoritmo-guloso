@@ -49,10 +49,10 @@ public abstract class MetodosGulosos {
 
 		Objeto aux = new Objeto(0,0);	//Objeto auxilar para a ordenação
 
+		/* Variaveis para armazenar os valores que serão adicionados na mochila no final */
 		int pesoFinal = 0;
 		int valorFinal = 0;
 		int numObj = 0;
-		int pesoAtual = 0;
 
 		/* Ordenar os valores do array de objetos */
 		for(int i = 0; i < listaDeObjetosDisponiveis.length -1; i++){
@@ -66,12 +66,16 @@ public abstract class MetodosGulosos {
 		}
 
 		/* Faz os teste para adicionar os objetos na mochila */
-		for(int i = 0; i <= listaDeObjetosDisponiveis.length -1 && pesoFinal + listaDeObjetosDisponiveis[i].getPeso() <= pesoMaximoDaMochila; i++){
-			pesoFinal += listaDeObjetosDisponiveis[i].getPeso();
-			valorFinal += listaDeObjetosDisponiveis[i].getValor();
-			numObj++;
+		for(int i = 0; i <= listaDeObjetosDisponiveis.length -1; i++){
+			if(pesoFinal + listaDeObjetosDisponiveis[i].getPeso() <= pesoMaximoDaMochila){
+				System.out.println(listaDeObjetosDisponiveis[i].getValor() + " | " + listaDeObjetosDisponiveis[i].getPeso());
+				pesoFinal += listaDeObjetosDisponiveis[i].getPeso();
+				valorFinal += listaDeObjetosDisponiveis[i].getValor();
+				numObj++;
+			}
 		}
 
+		/* Adiciona propriamente os valores no objeto Mochila */
 		mochila.setPesoUsado(pesoFinal);
 		mochila.setValorDentroDaMochila(valorFinal);
 		mochila.setNumObjetosNaMochila(numObj);
@@ -97,10 +101,10 @@ public abstract class MetodosGulosos {
 
 		Objeto aux = new Objeto(0,0);	//Objeto auxilar para a ordenação
 
+		/* Variaveis para armazenar os valores que serão adicionados na mochila no final */
 		int pesoFinal = 0;
 		int valorFinal = 0;
 		int numObj = 0;
-		int pesoAtual = 0;
 
 		/* Ordenar os valores do array de objetos */
 		for(int i = 0; i < listaDeObjetosDisponiveis.length -1; i++){
@@ -113,14 +117,17 @@ public abstract class MetodosGulosos {
 			}
 		}
 
+		/* Faz os teste para adicionar os objetos na mochila */
 		for(int i = listaDeObjetosDisponiveis.length -1; i >= 0; i--){
 			if(pesoFinal + listaDeObjetosDisponiveis[i].getPeso() <= pesoMaximoDaMochila){
+				System.out.println(listaDeObjetosDisponiveis[i].getValor() + " | " + listaDeObjetosDisponiveis[i].getPeso());
 				pesoFinal += listaDeObjetosDisponiveis[i].getPeso();
 				valorFinal += listaDeObjetosDisponiveis[i].getValor();
 				numObj++;
 			}
 		}
 
+		/* Adiciona propriamente os valores no objeto Mochila */
 		mochila.setPesoUsado(pesoFinal);
 		mochila.setValorDentroDaMochila(valorFinal);
 		mochila.setNumObjetosNaMochila(numObj);
@@ -146,13 +153,14 @@ public abstract class MetodosGulosos {
 
 		Objeto temp = new Objeto(0,0);	//Objeto auxilar para a ordenação
 
+		/* Variaveis para armazenar os valores que serão adicionados na mochila no final */
 		int pesoFinal = 0;
 		int valorFinal = 0;
 		int numObj = 0;
-		int pesoAtual = 0;
 		double aux = 0;
 		double aux2 = 0;
 
+		/* Ordenar os valores do array de objetos */
 		for(int i = 0; i < listaDeObjetosDisponiveis.length -1; i++){
 			for(int j = 0; j < listaDeObjetosDisponiveis.length - i -1; j++){
 				aux = listaDeObjetosDisponiveis[j].getValor() / listaDeObjetosDisponiveis[j].getPeso();
@@ -165,17 +173,20 @@ public abstract class MetodosGulosos {
 			}
 		}
 
+		/* Faz os teste para adicionar os objetos na mochila */
 		for(int i = listaDeObjetosDisponiveis.length -1; i >= 0; i--){
 			if(pesoFinal + listaDeObjetosDisponiveis[i].getPeso() <= pesoMaximoDaMochila){
+				System.out.println(listaDeObjetosDisponiveis[i].getValor() + " | " + listaDeObjetosDisponiveis[i].getPeso());
 				pesoFinal += listaDeObjetosDisponiveis[i].getPeso();
 				valorFinal += listaDeObjetosDisponiveis[i].getValor();
 				numObj++;
 			}
 		}
 
-				mochila.setPesoUsado(pesoFinal);
-				mochila.setValorDentroDaMochila(valorFinal);
-				mochila.setNumObjetosNaMochila(numObj);
+		/* Adiciona propriamente os valores no objeto Mochila */
+		mochila.setPesoUsado(pesoFinal);
+		mochila.setValorDentroDaMochila(valorFinal);
+		mochila.setNumObjetosNaMochila(numObj);
 
 		return mochila;
 	}
