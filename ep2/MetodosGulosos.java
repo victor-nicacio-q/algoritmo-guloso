@@ -47,13 +47,14 @@ public abstract class MetodosGulosos {
 	public static Mochila utilizaMenorPeso(double pesoMaximoDaMochila, Objeto[] listaDeObjetosDisponiveis) {
 		Mochila mochila = new Mochila(pesoMaximoDaMochila);
 
-		Objeto aux = new Objeto(0,0);
+		Objeto aux = new Objeto(0,0);	//Objeto auxilar para a ordenação
 
 		int pesoFinal = 0;
 		int valorFinal = 0;
 		int numObj = 0;
 		int pesoAtual = 0;
 
+		/* Ordenar os valores do array de objetos */
 		for(int i = 0; i < listaDeObjetosDisponiveis.length -1; i++){
 			for(int j = 0; j < listaDeObjetosDisponiveis.length - i -1; j++){
 				if(listaDeObjetosDisponiveis[j].getPeso() > listaDeObjetosDisponiveis[j + 1].getPeso()){
@@ -64,6 +65,7 @@ public abstract class MetodosGulosos {
 			}
 		}
 
+		/* Faz os teste para adicionar os objetos na mochila */
 		for(int i = 0; i <= listaDeObjetosDisponiveis.length -1 && pesoFinal + listaDeObjetosDisponiveis[i].getPeso() <= pesoMaximoDaMochila; i++){
 			pesoFinal += listaDeObjetosDisponiveis[i].getPeso();
 			valorFinal += listaDeObjetosDisponiveis[i].getValor();
@@ -93,7 +95,33 @@ public abstract class MetodosGulosos {
 	public static Mochila utilizaMaiorValor(double pesoMaximoDaMochila,	Objeto[] listaDeObjetosDisponiveis) {
 		Mochila mochila = new Mochila(pesoMaximoDaMochila);
 
-		// COMPLETAR
+		Objeto aux = new Objeto(0,0);	//Objeto auxilar para a ordenação
+
+		int pesoFinal = 0;
+		int valorFinal = 0;
+		int numObj = 0;
+		int pesoAtual = 0;
+
+		/* Ordenar os valores do array de objetos */
+		for(int i = 0; i < listaDeObjetosDisponiveis.length -1; i++){
+			for(int j = 0; j < listaDeObjetosDisponiveis.length - i -1; j++){
+				if(listaDeObjetosDisponiveis[j].getValor() > listaDeObjetosDisponiveis[j + 1].getValor()){
+					aux = listaDeObjetosDisponiveis[j];
+					listaDeObjetosDisponiveis[j] = listaDeObjetosDisponiveis[j + 1];
+					listaDeObjetosDisponiveis[j + 1] = aux;
+				}
+			}
+		}
+
+		for(int i = listaDeObjetosDisponiveis.length -1; i >= 0 && valorFinal + listaDeObjetosDisponiveis[i].getValor() <= pesoMaximoDaMochila; i--){
+			pesoFinal += listaDeObjetosDisponiveis[i].getPeso();
+			valorFinal += listaDeObjetosDisponiveis[i].getValor();
+			numObj++;
+		}
+
+		mochila.setPesoUsado(pesoFinal);
+		mochila.setValorDentroDaMochila(valorFinal);
+		mochila.setNumObjetosNaMochila(numObj);
 
 		return mochila;
 	}
