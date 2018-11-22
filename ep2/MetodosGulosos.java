@@ -144,29 +144,38 @@ public abstract class MetodosGulosos {
 	public static Mochila utilizaMaiorValorDivididoPorPeso(double pesoMaximoDaMochila, Objeto[] listaDeObjetosDisponiveis) {
 		Mochila mochila = new Mochila(pesoMaximoDaMochila);
 
-		Objeto aux = new Objeto(0,0);	//Objeto auxilar para a ordenação
+		Objeto temp = new Objeto(0,0);	//Objeto auxilar para a ordenação
 
 		int pesoFinal = 0;
 		int valorFinal = 0;
 		int numObj = 0;
 		int pesoAtual = 0;
-for(int i = 0; i < listaDeObjetosDisponiveis.length; i++) System.out.print("|" + listaDeObjetosDisponiveis[i].getValor());
-for(int i = 0; i < listaDeObjetosDisponiveis.length; i++) System.out.print("|" + listaDeObjetosDisponiveis[i].getPeso());
+		double aux = 0;
+		double aux2 = 0;
 
-		//for(int i = 0; i < listaDeObjetosDisponiveis.length; i++) listaDeObjetosDisponiveis[i] = listaDeObjetosDisponiveis[i].getValor() / listaDeObjetosDisponiveis[i].getPeso();;
-
-for(int i = 0; i < listaDeObjetosDisponiveis.length; i++) System.out.print("|" + listaDeObjetosDisponiveis[i].getValor());
-for(int i = 0; i < listaDeObjetosDisponiveis.length; i++) System.out.print("|" + listaDeObjetosDisponiveis[i].getPeso());
-		/* Ordenar os valores do array de objetos */
 		for(int i = 0; i < listaDeObjetosDisponiveis.length -1; i++){
 			for(int j = 0; j < listaDeObjetosDisponiveis.length - i -1; j++){
-				if(listaDeObjetosDisponiveis[j].getValor() > listaDeObjetosDisponiveis[j + 1].getValor()){
-					aux = listaDeObjetosDisponiveis[j];
+				aux = listaDeObjetosDisponiveis[j].getValor() / listaDeObjetosDisponiveis[j].getPeso();
+				aux2 = listaDeObjetosDisponiveis[j + 1].getValor() / listaDeObjetosDisponiveis[j + 1].getPeso();
+				if(aux > aux2){
+					temp = listaDeObjetosDisponiveis[j];
 					listaDeObjetosDisponiveis[j] = listaDeObjetosDisponiveis[j + 1];
-					listaDeObjetosDisponiveis[j + 1] = aux;
+					listaDeObjetosDisponiveis[j + 1] = temp;
 				}
 			}
 		}
+
+		for(int i = listaDeObjetosDisponiveis.length -1; i >= 0; i--){
+			if(pesoFinal + listaDeObjetosDisponiveis[i].getPeso() <= pesoMaximoDaMochila){
+				pesoFinal += listaDeObjetosDisponiveis[i].getPeso();
+				valorFinal += listaDeObjetosDisponiveis[i].getValor();
+				numObj++;
+			}
+		}
+
+				mochila.setPesoUsado(pesoFinal);
+				mochila.setValorDentroDaMochila(valorFinal);
+				mochila.setNumObjetosNaMochila(numObj);
 
 		return mochila;
 	}
