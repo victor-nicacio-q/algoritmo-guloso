@@ -113,10 +113,12 @@ public abstract class MetodosGulosos {
 			}
 		}
 
-		for(int i = listaDeObjetosDisponiveis.length -1; i >= 0 && valorFinal + listaDeObjetosDisponiveis[i].getValor() <= pesoMaximoDaMochila; i--){
-			pesoFinal += listaDeObjetosDisponiveis[i].getPeso();
-			valorFinal += listaDeObjetosDisponiveis[i].getValor();
-			numObj++;
+		for(int i = listaDeObjetosDisponiveis.length -1; i >= 0; i--){
+			if(pesoFinal + listaDeObjetosDisponiveis[i].getPeso() <= pesoMaximoDaMochila){
+				pesoFinal += listaDeObjetosDisponiveis[i].getPeso();
+				valorFinal += listaDeObjetosDisponiveis[i].getValor();
+				numObj++;
+			}
 		}
 
 		mochila.setPesoUsado(pesoFinal);
@@ -142,7 +144,29 @@ public abstract class MetodosGulosos {
 	public static Mochila utilizaMaiorValorDivididoPorPeso(double pesoMaximoDaMochila, Objeto[] listaDeObjetosDisponiveis) {
 		Mochila mochila = new Mochila(pesoMaximoDaMochila);
 
-		// COMPLETAR
+		Objeto aux = new Objeto(0,0);	//Objeto auxilar para a ordenação
+
+		int pesoFinal = 0;
+		int valorFinal = 0;
+		int numObj = 0;
+		int pesoAtual = 0;
+for(int i = 0; i < listaDeObjetosDisponiveis.length; i++) System.out.print("|" + listaDeObjetosDisponiveis[i].getValor());
+for(int i = 0; i < listaDeObjetosDisponiveis.length; i++) System.out.print("|" + listaDeObjetosDisponiveis[i].getPeso());
+
+		//for(int i = 0; i < listaDeObjetosDisponiveis.length; i++) listaDeObjetosDisponiveis[i] = listaDeObjetosDisponiveis[i].getValor() / listaDeObjetosDisponiveis[i].getPeso();;
+
+for(int i = 0; i < listaDeObjetosDisponiveis.length; i++) System.out.print("|" + listaDeObjetosDisponiveis[i].getValor());
+for(int i = 0; i < listaDeObjetosDisponiveis.length; i++) System.out.print("|" + listaDeObjetosDisponiveis[i].getPeso());
+		/* Ordenar os valores do array de objetos */
+		for(int i = 0; i < listaDeObjetosDisponiveis.length -1; i++){
+			for(int j = 0; j < listaDeObjetosDisponiveis.length - i -1; j++){
+				if(listaDeObjetosDisponiveis[j].getValor() > listaDeObjetosDisponiveis[j + 1].getValor()){
+					aux = listaDeObjetosDisponiveis[j];
+					listaDeObjetosDisponiveis[j] = listaDeObjetosDisponiveis[j + 1];
+					listaDeObjetosDisponiveis[j + 1] = aux;
+				}
+			}
+		}
 
 		return mochila;
 	}
