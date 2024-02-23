@@ -1,11 +1,11 @@
-import ep2.*;
+import src.*;
 
 /**
 	Classe para testar os algoritmos implementados.
 	
 	Será <b>desconsiderada</b> para a nota final
 */
-public class ExecutaGuloso {
+public class main {
 	/**
 		Aqui você deve colocar seus testes.
 	**/
